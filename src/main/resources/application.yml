@@ -1,8 +1,47 @@
+server:
+  port: 9000  # 인증 서버는 리소스 서버와 다른 포트에서 동작할 수 있습니다.
+
 spring:
-  main:
-    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      authorizationserver:
+        issuer-uri: http://localhost:9000  # 토큰의 발급자 정보 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL:jdbc:mysql://localhost:3306/OAuth?useSSL=false&allowPublicKeyRetrieval=true}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+
+
+
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: ${DB_URL:jdbc:mysql://localhost:3306/OAuth?useSSL=false&allowPublicKeyRetrieval=true}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          my-client:
+#            client-id: my-client
+#            client-secret: my-secret
+#            scope: read
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "{baseUrl}/login/oauth2/code/my-client"
+#            provider: my-provider  # Provider ID 추가
+#        provider:
+#          my-provider:
+#            token-uri: http://localhost:8080/oauth2/token
+#            authorization-uri: http://localhost:8080/oauth2/authorize
+#            user-info-uri: http://localhost:88080/oauth2/userinfo
+#            user-name-attribute: name
+#      resource-server:
+#        jwt:
+#          issuer-uri: http://localhost:8080
+#
+#server:
+#  port: 8080
